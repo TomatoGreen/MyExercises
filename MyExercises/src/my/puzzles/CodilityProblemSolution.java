@@ -69,44 +69,25 @@ public class CodilityProblemSolution {
 	/*
 	 * Break A into three sub arrays. Breaking Points p and q should follow below rule:
 	 * 0<p<q-1<A.length-1. The cost of breaking function is A[p] + A[q]
-	 * Return the minimum cost value. 
+	 * Return the minimum cost value. This solution is not O(n)...Still cannot find O(n) solution.
 	 * @param A
 	 * @return
 	 */
 	public int getMinCostOfBreakedChain(int[] A) {
         // write your code in Java SE 8
-        int minCost=-1;
-        int minIndex1 = 0, minIndex2 = 0;
-        
-        for (int i=1; i<A.length-1; i++){
-        	if(i == 1)
-        		minIndex1=i;
-        	else
-        		if(A[minIndex1]>A[i])
-        			minIndex1 = i;
-        }
-
-        if(minIndex1>2){
-	        for (int i=1; i<minIndex1-1; i++){
-	        	if(i==1)
-	        		minIndex2 = i;
-	        	else
-	        		if(A[minIndex2]>A[i])
-	        			minIndex2 = i;
-	        }
-        }
-
-        if(minIndex1<A.length-3){
-	        for (int i=A.length-2; i>minIndex1+1; i--){
-	        	if(minIndex2==0 && i==A.length-2)
-	        		minIndex2 = i;
-	        	else
-	        		if(A[minIndex2]>A[i])
-	        			minIndex2 = i;
-	        }
-        }
-
-        minCost = A[minIndex1] + A[minIndex2];
-        return minCost;
+		int index = 1, minCost = 0;
+		for (int i=2; i<=A.length-3; i++){
+			index=1;
+			while(index+i<A.length-1){
+				if(minCost == 0)
+					minCost = A[index] + A[index+i];
+				else{
+					if(minCost>A[index] + A[index+i])
+						minCost = A[index] + A[index+i];
+				}
+				index ++;
+			}
+		}
+		return minCost;
     }
 }
