@@ -90,4 +90,30 @@ public class CodilityProblemSolution {
 		}
 		return minCost;
     }
+	
+	/*
+	 * Break A into three sub arrays. Breaking Points p and q should follow below rule:
+	 * 0<p<q-1<A.length-1. The cost of breaking function is A[p] + A[q]
+	 * Return the minimum cost value. **Linear Solution**.
+	 * @param A
+	 * @return
+	 */
+	public int getMinCostOfBreakedChainLinear(int[] A) {
+		int minCost = 0, minRight = 0;
+		boolean first = false;
+		
+		for(int i=A.length-2; i>2; i--){
+			if(first==false){
+				minCost = A[i] + A[i-2];
+				minRight = A[i];
+				first = true;
+			}else{
+				if(A[i]<minRight)
+					minRight = A[i];
+				if((minRight+A[i-2])<minCost)
+					minCost = minRight+A[i-2];
+			}				
+		}
+		return minCost;
+	}
 }
