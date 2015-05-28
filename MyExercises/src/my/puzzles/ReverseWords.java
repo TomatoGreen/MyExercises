@@ -1,6 +1,5 @@
 package my.puzzles;
 
-import java.util.Stack;
 import java.util.StringTokenizer;
 
 public class ReverseWords {
